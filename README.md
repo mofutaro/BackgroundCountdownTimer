@@ -1,0 +1,2 @@
+# BackgroundCountdownTimer
+SwiftUIとCoreDataで構築したカウントダウンタイマー。CoreDataにタイマーの進捗を記録し、アプリがキルされてもカウントダウンを継続します。
