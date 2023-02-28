@@ -15,30 +15,58 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    
+    @FetchRequest(entity: CountdownSession.entity(), sortDescriptors: [])
+    private var sessions:  FetchedResults<CountdownSession>
+    private var session: CountdownSession? { sessions.first }
+    
+    @State private var minutes: Int = 0
+    @State private var seconds: Int = 0
+    
+    private var sessionDurationSeconds: Int {
+        minutes * 60 + seconds
+    }
+    
+    private var canStart: Bool {
+        sessionDurationSeconds > 0
+    }
+    
+    
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+            VStack {
+                if let session = session {
+                    TimerView(session: session)
+                } else {
+                    List {
+                        Section("時間") {
+                            Picker("分", selection: $minutes) {
+                                ForEach(0...99, id: \.self) { value in
+                                    Text("\(value)分").tag(value)
+                                }
+                            }
+                            
+                            Picker("秒", selection: $seconds) {
+                                ForEach(0...59, id: \.self) { value in
+                                    Text("\(value)秒").tag(value)
+                                }
+                            }
+                        }
+                        Button {
+                            start()
+                        } label: {
+                            Label("スタート", systemImage: "play")
+                                .opacity(canStart ? 1 : 0.5)
+                        }
+                        .disabled(!canStart)
                     }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+
+                    
                 }
             }
-            Text("Select an item")
+
+            
         }
     }
 
@@ -70,6 +98,26 @@ struct ContentView: View {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
+        }
+    }
+    
+    private func start() {
+        CountdownSession.insert(in: viewContext, durationSeconds: sessionDurationSeconds)
+        try? viewContext.save()
+    }
+    
+    func formatTimeMillis(session: CountdownSession) -> String {
+        let waitingMillis = max(session.durationMillis() - session.currentProgressMillis(), 0)
+        var remainder: Int = waitingMillis % 1000
+        let waitingSec: Double = Double(waitingMillis - remainder) / 1000 + ((remainder > 0) ? 1 : 0)
+        let hours = Int(waitingSec / 3600)
+        remainder = Int(waitingSec) % 3600
+        let minutes = Int(Double(remainder) / 60)
+        let seconds = remainder % 60
+        if (hours > 0) {
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            return String(format: "%02d:%02d", minutes, seconds)
         }
     }
 }

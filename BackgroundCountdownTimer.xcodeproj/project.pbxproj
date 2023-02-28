@@ -13,6 +13,8 @@
 		A36B589629ADE3B400F462D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A36B589529ADE3B400F462D5 /* Preview Assets.xcassets */; };
 		A36B589829ADE3B400F462D5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36B589729ADE3B400F462D5 /* Persistence.swift */; };
 		A36B589B29ADE3B400F462D5 /* BackgroundCountdownTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A36B589929ADE3B400F462D5 /* BackgroundCountdownTimer.xcdatamodeld */; };
+		A36B58A329ADE5CB00F462D5 /* CountdownSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36B58A229ADE5CB00F462D5 /* CountdownSession.swift */; };
+		A36B58A529ADF28B00F462D5 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36B58A429ADF28B00F462D5 /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		A36B589529ADE3B400F462D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A36B589729ADE3B400F462D5 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		A36B589A29ADE3B400F462D5 /* BackgroundCountdownTimer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BackgroundCountdownTimer.xcdatamodel; sourceTree = "<group>"; };
+		A36B58A229ADE5CB00F462D5 /* CountdownSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownSession.swift; sourceTree = "<group>"; };
+		A36B58A429ADF28B00F462D5 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +59,10 @@
 		A36B588D29ADE3B300F462D5 /* BackgroundCountdownTimer */ = {
 			isa = PBXGroup;
 			children = (
+				A36B58A129ADE5B500F462D5 /* Models */,
 				A36B588E29ADE3B300F462D5 /* BackgroundCountdownTimerApp.swift */,
 				A36B589029ADE3B300F462D5 /* ContentView.swift */,
+				A36B58A429ADF28B00F462D5 /* TimerView.swift */,
 				A36B589229ADE3B400F462D5 /* Assets.xcassets */,
 				A36B589729ADE3B400F462D5 /* Persistence.swift */,
 				A36B589929ADE3B400F462D5 /* BackgroundCountdownTimer.xcdatamodeld */,
@@ -71,6 +77,14 @@
 				A36B589529ADE3B400F462D5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A36B58A129ADE5B500F462D5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A36B58A229ADE5CB00F462D5 /* CountdownSession.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A36B58A529ADF28B00F462D5 /* TimerView.swift in Sources */,
+				A36B58A329ADE5CB00F462D5 /* CountdownSession.swift in Sources */,
 				A36B589829ADE3B400F462D5 /* Persistence.swift in Sources */,
 				A36B589129ADE3B300F462D5 /* ContentView.swift in Sources */,
 				A36B588F29ADE3B300F462D5 /* BackgroundCountdownTimerApp.swift in Sources */,
